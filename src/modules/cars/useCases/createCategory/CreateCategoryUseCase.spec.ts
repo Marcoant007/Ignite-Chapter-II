@@ -1,19 +1,51 @@
-describe("Criar categoria", ()=> {
-    //aqui cria os testes e coloca sempre dentro do it()
+import { AppError } from "../../../../shared/errors/AppError";
+import CategoriesRepositoryInMemory from "../../repositories/in-memory/CategoriesRepositoryInMemory";
+import CreateCategoryUseCase from "./CreateCategoryUseCase"
 
-    it("Espero que 2 + 2 seja 4", ()=> {
-        const soma = 2 + 2 ;
-        const resultado = 4;
+let createCategoryUseCase : CreateCategoryUseCase;
+let categoriesRepositoryInMemory: CategoriesRepositoryInMemory;
 
-        expect(soma).toBe(resultado);
-        //expect =  espero que minha soma seja igual ao resultado
+
+describe("Create Category", () => {
+
+    beforeEach(()=> {
+        categoriesRepositoryInMemory = new CategoriesRepositoryInMemory();
+        createCategoryUseCase = new CreateCategoryUseCase(categoriesRepositoryInMemory);
     })
 
-    it("Espero que 2 + 2 seja 5", ()=> {
-        const soma = 2 + 2;
-        const resultado  = 5;
+    it("should be able to create a new category", async()=> {
+        const category = {
+            name: "Category Test",
+            description: "Category description test" 
+        }
+        await createCategoryUseCase.execute({
+            name: category.name,
+            description: category.description
+        });
 
-        expect(soma).not.toBe(resultado);
-        //expect =  espero que minha soma não seja igual ao resultado
+        const categoryCreated = await categoriesRepositoryInMemory.findByName(category.name);
+
+        expect(categoryCreated).toHaveProperty("id");
+
     })
+
+    it("should not be able to create a new category with same name exists ", async()=> {
+      expect(async ()=> {
+        const category = {
+            name: "Category Test",
+            description: "Category description test" 
+        }
+
+        await createCategoryUseCase.execute({
+            name: category.name,
+            description: category.description
+        });
+
+        await createCategoryUseCase.execute({
+            name: category.name,
+            description: category.description
+        });
+      }).rejects.toBeInstanceOf(AppError); // espero que se der o erro, esse erro seja do meu app error.
+    })
+
 })
