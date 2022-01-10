@@ -12,11 +12,10 @@ interface IRequest {
     brand: string;
     category_id: string;
 }
-
-// @injectable()
+@injectable()
 class CreateCarUseCase {
 
-    constructor( /*@inject("CarsRepository")*/ private carsRepository: ICarsRepository){}
+    constructor( @inject("CarsRepository") private carsRepository: ICarsRepository){}
 
     async execute({ name, description, daily_rate, license_plate, fine_amount, brand, category_id }: IRequest): Promise<Car> {
 
