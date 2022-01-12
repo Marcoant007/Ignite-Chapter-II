@@ -8,6 +8,8 @@ interface ICarsRepository {
 
     findByLicensePlate(license_plate: string): Promise<Car>;
 
+    findAvailable():Promise<Car[]>
+
 }
 
 export default ICarsRepository
