@@ -9,6 +9,10 @@ class CarsRepository implements ICarsRepository {
     constructor() {
         this.repository = getRepository(Car);
     }
+    
+    findById(id: string): Promise<Car> {
+        throw new Error("Method not implemented.");
+    }
 
 
     async create({ name, brand, category_id, daily_rate, description, fine_amount, license_plate }: ICreateCarDTO): Promise<Car> {
