@@ -1,6 +1,6 @@
 import { getRepository, Repository } from "typeorm";
 import ICreateCarDTO from "../../../dtos/ICreateCarDTO";
-import ICarsRepository from "../../../repositories/ICarsRepository";
+import ICarsRepository from "../../../testing/ICarsRepository";
 import Car from "../entities/Car";
 
 class CarsRepository implements ICarsRepository {
@@ -10,14 +10,15 @@ class CarsRepository implements ICarsRepository {
         this.repository = getRepository(Car);
     }
     
-    findById(id: string): Promise<Car> {
-        throw new Error("Method not implemented.");
+    async findById(id: string): Promise<Car> {
+        const car = await this.repository.findOne(id);
+        return car
     }
 
 
-    async create({ name, brand, category_id, daily_rate, description, fine_amount, license_plate }: ICreateCarDTO): Promise<Car> {
+    async create({ name, brand, category_id, daily_rate, description, fine_amount, license_plate, specifications }: ICreateCarDTO): Promise<Car> {
         const carDB = this.repository.create({
-            name, brand, category_id, daily_rate, description, fine_amount, license_plate
+            name, brand, category_id, daily_rate, description, fine_amount, license_plate, specifications
         });
         await this.repository.save(carDB);
 

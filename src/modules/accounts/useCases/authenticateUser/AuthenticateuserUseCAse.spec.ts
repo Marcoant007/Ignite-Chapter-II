@@ -1,6 +1,6 @@
 import { AppError } from "../../../../shared/errors/AppError";
 import ICreateUserDTO from "../../dtos/ICreateUserDTO";
-import UsersRepositoryInMemory from "../../repositories/in-memory/UsersRepositoryInMemory";
+import UsersRepositoryInMemory from "../../testing/in-memory/UsersRepositoryInMemory";
 import CreateUserUseCase from "../createUser/CreateUserUseCase";
 import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase"
 
@@ -10,9 +10,6 @@ let usersRepositoryInMemory: UsersRepositoryInMemory;
 let createUserUseCase: CreateUserUseCase;
 
 describe("Authenticate User", () => {
-
-
-
     beforeEach(() => {
         usersRepositoryInMemory = new UsersRepositoryInMemory();
         authenticateUserUseCase = new AuthenticateUserUseCase(usersRepositoryInMemory);

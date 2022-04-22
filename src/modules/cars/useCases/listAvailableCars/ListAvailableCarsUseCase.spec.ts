@@ -1,5 +1,5 @@
 import CarsRepository from "../../infra/typeorm/repositories/CarsRepository";
-import CarsRepositoryInMemory from "../../repositories/in-memory/CarsRepositoryInMemory";
+import CarsRepositoryInMemory from "../../testing/in-memory/CarsRepositoryInMemory";
 import ListAvailableCarsUseCase from "./ListAvailableCarsUseCase";
 
 let listAvailableCarsUseCase: ListAvailableCarsUseCase;

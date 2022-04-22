@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
 import Car from "../../infra/typeorm/entities/Car";
-import ICarsRepository from "../../repositories/ICarsRepository";
+import ICarsRepository from "../../testing/ICarsRepository";
 
 interface IRequest {
     category_id?: string;

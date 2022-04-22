@@ -1,15 +1,20 @@
 import { AppError } from "../../../../shared/errors/AppError";
 import CarsRepository from "../../infra/typeorm/repositories/CarsRepository";
-import CarsRepositoryInMemory from "../../repositories/in-memory/CarsRepositoryInMemory"
+import { SpecificationsRepository } from "../../infra/typeorm/repositories/SpecificationsRepository";
+import CarsRepositoryInMemory from "../../testing/in-memory/CarsRepositoryInMemory";
+import { SpecificationRepositoryInMemory } from "../../testing/in-memory/SpecificationRepositoryInMemory";
 import { CreateCarSpecificationUseCase } from "./CreateCarSpecificationUseCase"
 
 let createCarSpecificationUseCase: CreateCarSpecificationUseCase
 let carsRepositoryInMemory: CarsRepositoryInMemory;
+let specificationRepositoryInMemory : SpecificationRepositoryInMemory;
+
 describe("Create Car Specification", ()=> {
 
     beforeEach(()=> {
         carsRepositoryInMemory =  new CarsRepositoryInMemory();
-        createCarSpecificationUseCase = new CreateCarSpecificationUseCase(carsRepositoryInMemory);
+        specificationRepositoryInMemory = new SpecificationRepositoryInMemory();
+        createCarSpecificationUseCase = new CreateCarSpecificationUseCase(carsRepositoryInMemory, specificationRepositoryInMemory);
         
     })
     
