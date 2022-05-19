@@ -7,9 +7,12 @@ import { ICategoriesRepository } from '../../modules/cars/testing/ICategoriesRep
 import { ISpecificationsRepository } from '../../modules/cars/testing/ISpecificationsRepository';
 import IUsersRepository from '../../modules/accounts/testing/IUsersRepository';
 import ICarsRepository from '../../modules/cars/testing/ICarsRepository';
+import { ICarsImageRepository } from '../../modules/cars/testing/ICarsImagesRepository';
+import { CarsImagesRepository } from '../../modules/cars/infra/typeorm/repositories/CarsImageRepository';
 
 
 container.registerSingleton<ICategoriesRepository>("CategoriesRepository", CategoriesRepository);
 container.registerSingleton<ISpecificationsRepository>("SpecificationRepository", SpecificationsRepository);
 container.registerSingleton<IUsersRepository>("UsersRepository", UsersRepository);
 container.registerSingleton<ICarsRepository>("CarsRepository",CarsRepository );
+container.registerSingleton<ICarsImageRepository>("CarsImagesRepository", CarsImagesRepository);
