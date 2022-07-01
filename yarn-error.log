@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\Marco Antonio\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add dayjs
+  C:\Program Files\nodejs\node.exe C:\Users\Marco Antonio\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add supertest @types/supertest
 
 PATH: 
-  C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Java\jdk-11.0.13\bin;C:\Program Files\apache-maven-3.8.4\bin;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\Git\cmd;C:\Users\Marco Antonio\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\ProgramData\chocolatey\bin;C:\Users\Marco Antonio\AppData\Roaming\nvm;C:\Program Files\nodejs;;C:\ProgramData\UNIVALI\Portugol Studio;C:\Users\Marco Antonio\AppData\Local\Microsoft\WindowsApps;C:\Users\Marco Antonio\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Marco Antonio\AppData\Roaming\npm;C:\ProgramData\nvm;C:\Program Files\nodejs
+  C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Java\jdk-11.0.13\bin;C:\Program Files\apache-maven-3.8.4\bin;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\Git\cmd;C:\ProgramData\nvm;C:\Program Files\nodejs;C:\ProgramData\chocolatey\bin;C:\ProgramData\nvm;C:\Program Files\nodejs;;C:\ProgramData\UNIVALI\Portugol Studio;C:\Users\Marco Antonio\AppData\Local\Microsoft\WindowsApps;C:\Users\Marco Antonio\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Marco Antonio\AppData\Roaming\npm;C:\Users\Marco Antonio\AppData\Roaming\nvm;C:\Program Files\heroku\bin
 
 Yarn version: 
   1.22.17
@@ -31,6 +31,7 @@ npm manifest:
     "dependencies": {
       "bcryptjs": "^2.4.3",
       "csv-parse": "^4.16.3",
+      "dayjs": "^1.11.2",
       "express": "^4.17.1",
       "express-async-errors": "^3.1.1",
       "jsonwebtoken": "^8.5.1",
