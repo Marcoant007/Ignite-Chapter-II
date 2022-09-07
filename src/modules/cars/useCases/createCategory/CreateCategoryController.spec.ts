@@ -49,7 +49,6 @@ describe("Create Category Controller ", () => {
         const responseToken = await request(app).post("/sessions").send({
             email: "admin@rentx.com.br",
             password: "admin",
-
         })
         const { token } = responseToken.body;
 
