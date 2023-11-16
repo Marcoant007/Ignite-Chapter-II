@@ -4,6 +4,7 @@ import ICreateUserDTO from "../../dtos/ICreateUserDTO";
 import {hash} from "bcryptjs";
 import { AppError } from "../../../../shared/errors/AppError";
 import IUsersRepository from "../../testing/IUsersRepository";
+import User from "../../infra/typeorm/entities/User";
 
 @injectable()
 class CreateUserUseCase {
@@ -13,7 +14,7 @@ class CreateUserUseCase {
             private usersRepository: IUsersRepository
         ) { }
 
-    async execute({ name, email, password, driver_license, isAdmin }: ICreateUserDTO): Promise<void> {
+    async execute({ name, email, password, driver_license, isAdmin }: ICreateUserDTO): Promise<User> {
         const passwordHash = await hash(password, 8);
 
         const userAlreadyExists = await this.usersRepository.findByEmail(email);
@@ -22,13 +23,15 @@ class CreateUserUseCase {
             throw new AppError("User Already Exists", 400)
         }
 
-        await this.usersRepository.create({
+        const user = await this.usersRepository.create({
             name,
             email,
             password: passwordHash,
             driver_license,
             isAdmin
-        })
+        });
+
+        return user;
     }
 }
 

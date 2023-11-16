@@ -1,3 +1,3 @@
 import { app } from "./app";
 
-app.listen(3333, ()=> console.log("Server is running 🐱‍👤"))
+app.listen(3333, ()=> console.log("Server is running port 3333 🐱‍👤 "));

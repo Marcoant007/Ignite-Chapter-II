@@ -3,6 +3,7 @@ import { IDateProvider } from '../../../shared/container/providers/DateProvider/
 import { Rental } from '../infra/typeorm/entities/Rentals';
 import { IRentalsRepository } from '../testing/IRentalsRepository';
 import { AppError } from './../../../shared/errors/AppError';
+import ICarsRepository from '../../cars/testing/ICarsRepository';
 
 
 interface IRequest {
@@ -19,7 +20,10 @@ class CreateRentalUseCase {
         private rentalsRepository: IRentalsRepository,
 
         @inject("DayjsDateProvider")
-        private dateProvider: IDateProvider
+        private dateProvider: IDateProvider,
+
+        @inject("CarsRepository")
+        private carsRepository: ICarsRepository,
     ) { }
 
     async execute({ user_id, car_id, expected_return_date }: IRequest): Promise<Rental> {
@@ -50,6 +54,8 @@ class CreateRentalUseCase {
             car_id,
             expected_return_date,
         });
+
+        await this.carsRepository.updateAvailable(car_id, false);
 
         return rental
     }
