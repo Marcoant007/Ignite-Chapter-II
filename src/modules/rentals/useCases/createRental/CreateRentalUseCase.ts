@@ -1,9 +1,9 @@
 import { inject, injectable } from 'tsyringe';
-import { IDateProvider } from '../../../shared/container/providers/DateProvider/IDateProvider';
-import { Rental } from '../infra/typeorm/entities/Rentals';
-import { IRentalsRepository } from '../testing/IRentalsRepository';
-import { AppError } from './../../../shared/errors/AppError';
-import ICarsRepository from '../../cars/testing/ICarsRepository';
+import { IDateProvider } from '../../../../shared/container/providers/DateProvider/IDateProvider';
+import { Rental } from '../../infra/typeorm/entities/Rentals';
+import { IRentalsRepository } from '../../testing/IRentalsRepository';
+import { AppError } from '../../../../shared/errors/AppError';
+import ICarsRepository from '../../../cars/testing/ICarsRepository';
 
 
 interface IRequest {
