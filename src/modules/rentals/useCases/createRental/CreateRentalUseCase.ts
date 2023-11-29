@@ -4,14 +4,11 @@ import { Rental } from '../../infra/typeorm/entities/Rentals';
 import { IRentalsRepository } from '../../testing/IRentalsRepository';
 import { AppError } from '../../../../shared/errors/AppError';
 import ICarsRepository from '../../../cars/testing/ICarsRepository';
-
-
 interface IRequest {
     user_id: string;
     car_id: string;
     expected_return_date: Date;
 }
-
 
 @injectable()
 class CreateRentalUseCase {
@@ -32,13 +29,13 @@ class CreateRentalUseCase {
         const carUnavailable = await this.rentalsRepository.findOpenRentalByCar(car_id);
 
         if (carUnavailable) {
-            throw new AppError(" Car is unavailable");
+            throw new AppError("Car is unavailable");
         }
 
         const rentalOpenToUser = await this.rentalsRepository.findOpenRentalByUser(user_id);
 
         if (rentalOpenToUser) {
-            throw new AppError(" There's a rental in progress for user!");
+            throw new AppError("There's a rental in progress for user!");
         }
 
         const dateNow = this.dateProvider.dateNow();
@@ -46,7 +43,7 @@ class CreateRentalUseCase {
         const compare = this.dateProvider.compareInHours(dateNow, expected_return_date);
 
         if (compare < minimumHour) {
-            throw new AppError(" Invalid return time!");
+            throw new AppError("Invalid return time!");
         }
 
         const rental = await this.rentalsRepository.create({
@@ -55,7 +52,7 @@ class CreateRentalUseCase {
             expected_return_date,
         });
 
-        await this.carsRepository.updateAvailable(car_id, false);
+        this.carsRepository.updateAvailable(car_id, false);
 
         return rental
     }

@@ -7,27 +7,28 @@ import { CreateCarSpecificationUseCase } from "./CreateCarSpecificationUseCase"
 
 let createCarSpecificationUseCase: CreateCarSpecificationUseCase
 let carsRepositoryInMemory: CarsRepositoryInMemory;
-let specificationRepositoryInMemory : SpecificationRepositoryInMemory;
+let specificationRepositoryInMemory: SpecificationRepositoryInMemory;
 
-describe("Create Car Specification", ()=> {
+describe("Create Car Specification", () => {
 
-    beforeEach(()=> {
-        carsRepositoryInMemory =  new CarsRepositoryInMemory();
+    beforeEach(() => {
+        carsRepositoryInMemory = new CarsRepositoryInMemory();
         specificationRepositoryInMemory = new SpecificationRepositoryInMemory();
         createCarSpecificationUseCase = new CreateCarSpecificationUseCase(carsRepositoryInMemory, specificationRepositoryInMemory);
-        
+
     })
-    
-    it("shoulb not be able to add a new specification to a now-existent car", async ()=> {
-       expect(async () => {
+
+    it("shoulb not be able to add a new specification to a now-existent car", async () => {
         const car_id = "1234";
-        const specifications_id  =  ["456"];
-        await createCarSpecificationUseCase.execute({car_id, specifications_id});
-       }).rejects.toBeInstanceOf(AppError);
+        const specifications_id = ["456"];
+
+        await expect(
+            createCarSpecificationUseCase.execute({ car_id, specifications_id })
+        ).rejects.toEqual(new AppError("Car does not exits!"));
     })
-    
-    
-    it("shoulb be able to add a new specification to the car", async ()=> {
+
+
+    it("shoulb be able to add a new specification to the car", async () => {
         const car = await carsRepositoryInMemory.create({
             name: "Name Car",
             description: "Description Car",
@@ -38,13 +39,13 @@ describe("Create Car Specification", ()=> {
         });
 
         const specification = await specificationRepositoryInMemory.create({
-            description : "teste",
+            description: "teste",
             name: "teste"
         })
 
-        const specifications_id  =  [specification.id]; 
-        const specificationsCars = await createCarSpecificationUseCase.execute({car_id: car.id, specifications_id});
-    
+        const specifications_id = [specification.id];
+        const specificationsCars = await createCarSpecificationUseCase.execute({ car_id: car.id, specifications_id });
+
         expect(specificationsCars).toHaveProperty("specifications");
         expect(specificationsCars.specifications.length).toBe(1);
     });
